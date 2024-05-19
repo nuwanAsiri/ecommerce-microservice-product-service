@@ -1,4 +1,4 @@
-package com.ecommerce.microservice.order.product;
+package com.ecommerce.microservice.product;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
