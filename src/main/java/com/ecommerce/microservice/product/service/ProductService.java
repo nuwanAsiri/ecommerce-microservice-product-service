@@ -3,6 +3,7 @@ package com.ecommerce.microservice.product.service;
 import com.ecommerce.microservice.product.entity.Product;
 import com.ecommerce.microservice.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Cacheable("products")
     public List<Product> getProducts(){
         return productRepository.findAll();
     }

@@ -1,7 +1,7 @@
 package com.ecommerce.microservice.product.controller;
 
 import com.ecommerce.microservice.product.entity.Product;
-import com.ecommerce.microservice.product.repository.ProductRepository;
+import com.ecommerce.microservice.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,28 +12,25 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @GetMapping
     public List<Product> getProducts(){
-        return productRepository.findAll();
+        return productService.getProducts();
     }
 
     @PostMapping
     public Product createProduct(@RequestBody Product product){
-        return productRepository.save(product);
+        return productService.createProduct(product);
     }
 
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody Product productDetails){
-        Product product = productRepository.findById(id).orElseThrow();
-        product.setName(productDetails.getName());
-        product.setPrice(productDetails.getPrice());
-        return productRepository.save(product);
+        return productService.updateProduct(id, productDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id){
-        productRepository.deleteById(id);
+        productService.deleteProduct(id);
     }
 }
